@@ -1,0 +1,23 @@
+<div class="container">
+    <p>
+      <strong>Type:</strong>
+      <%= @account.accttype %>
+    </p>
+    <p>
+      <strong>Name:</strong>
+      <%= @account.name %>
+    </p>
+
+    <p>
+      <strong>Balance:</strong>
+      <%= @account.balance %>
+    </p>
+
+    <p>
+      <strong>Holdings:</strong>
+      <%= @account.holdings %>
+    </p>
+
+    <td><%= link_to "Update", edit_account_path(@account), class: "btn btn-primary" %></td>
+    <%= link_to "Back", accounts_path, class: "btn btn-secondary" %>
+</div>

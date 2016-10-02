@@ -1,0 +1,7 @@
+<tr class="account">
+    <td class="account_accttype"><%= account.accttype %></td>
+    <td><%= account.name %></td>
+    <td class="account_balance">$<%= sprintf("%.2f", account.balance) %></td>
+    <td><%= account.holdings %></td>
+    <td><%= link_to "Edit", edit_user_account_path(@user, account), class: "btn btn-primary" %></td>
+</tr>

@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <table style="width: 100%;">
+                <td><h2 class="panel-title">Accounts</h2></td>
+                <td style="float: right;"><%= link_to "New Account", new_user_account_path(@user), class: "btn btn-success" %></td>
+            </table>
+        </div>
+        <div class="panel-body">
+
+            <table class="table">
+                <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Balance</th>
+                    <th>Holdings</th>
+                </tr>
+
+                <% @accounts.each do |account| %>
+                    <tr class="account">
+                          <td class="account_accttype"><%= account.accttype %></td>
+                          <td><%= account.name %></td>
+                          <td class="account_balance">$<%= sprintf("%.2f", account.balance) %></td>
+                          <td><%= account.holdings %></td>
+                          <td><%= link_to "Edit", edit_user_account_path(@user, account), class: "btn btn-primary" %></td>
+                    </tr>
+                <% end %>
+                <tr>
+                    <td></td>
+                    <td><b>Total</b></td>
+                    <td id="total_balance"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        var total = 0;
+        var accounts = $('.account');
+        $.each(accounts, function() {
+            var type = $(this).find(".account_accttype").text();
+            var balance = $(this).find(".account_balance");
+
+            if(type === "Debt"){
+                balance.css('color','red');
+                total -= parseFloat(balance.text().replace('$', ''));
+            } else {
+                total += parseFloat(balance.text().replace('$', ''));
+            }
+        });
+        $('#total_balance').text('$' + total.toFixed(2).toString());
+    });
+</script>
+

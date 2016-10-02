@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">Updating Account</h1>
+        </div>
+        <div class="panel-body">
+            <%= form_for @account, url: user_account_path(@user), html: { method: :patch } do |f| %>
+
+                <% if @account.errors.any? %>
+                    <div id="error_explanation">
+                        <h2>
+                            <%= pluralize(@account.errors.count, "error") %> prohibited
+                            this account from being saved:
+                        </h2>
+                        <ul>
+                            <% @account.errors.full_messages.each do |msg| %>
+                                <li><%= msg %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <p>
+                    <%= f.label :Type %><br>
+                    <%= f.text_field :accttype, disabled: true, class: "form-control" %>
+                <p>
+                    <%= f.label :name %><br>
+                    <%= f.text_field :name, class: "form-control" %>
+                </p>
+
+                <p>
+                    <%= f.label :balance %><br>
+                    <%= f.text_field :balance, class: "form-control" %>
+                </p>
+
+                <div class="field" id="holdings_div">
+                    <p>
+                        <%= f.label :holdings %><br>
+                        <%= f.text_field :holdings, class: "form-control" %>
+                    </p>
+                </div>
+
+                <p>
+                    <%= f.submit class: "btn btn-primary" %>
+                </p>
+            <% end %>
+            <table style="width: 100%;">
+                <td><%= link_to "Cancel", user_path(@user), class: "btn btn-secondary" %></td>
+                <td style="float: right;"><%= link_to "Delete", user_account_path(@user, @account), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %></td>
+            </table>
+        </div>
+    </div>
+</div>
+
+        <script>
+          $(document).ready(function(){
+             if($("#account_accttype").val() != "Investment"){
+            $("#holdings_div").css("display","none")
+                $("#account_holdings").attr("disabled","disabled");
+             }
+             else{
+            $("#holdings_div").css("display","block")
+                $("#account_holdings").removeAttr("disabled");
+             }
+
+             $("#account_accttype").change(function(){
+                if($(this).val() != "Investment"){
+              $("#holdings_div").css("display","none")
+                  $("#account_holdings").attr("disabled","disabled");
+                }
+                else{
+              $("#holdings_div").css("display","block")
+                  $("#account_holdings").removeAttr("disabled");
+                }
+             })
+          });
+
+        </script>
