@@ -26,6 +26,10 @@ A Ruby on Rails implementation of a personal finances manager.
 
 - Active Record validation
 
+- UI clean up
+
+- Test suites
+
 # Website
 
 https://protected-sea-95795.herokuapp.com/
